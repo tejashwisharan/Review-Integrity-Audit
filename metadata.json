@@ -1,0 +1,7 @@
+{
+  "name": "TrustScan AI",
+  "description": "An AI-powered review authenticity analyzer that detects fake vs. real Google reviews for any business or place using advanced pattern recognition.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
