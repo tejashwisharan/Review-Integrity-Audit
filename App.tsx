@@ -73,9 +73,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pb-20 selection:bg-blue-100 bg-slate-50">
+    <div className="min-h-screen pb-10 selection:bg-blue-100 bg-slate-50">
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.location.reload()}>
             <div className="bg-blue-600 text-white p-2 rounded-lg">
               <i className="fas fa-shield-halved text-lg"></i>
@@ -85,31 +85,31 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 mt-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 mt-8 sm:mt-16">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
             Review Integrity Audit
           </h2>
-          <p className="text-slate-500 font-medium">
+          <p className="text-slate-500 font-medium text-sm sm:text-base">
             Find any business to check if its Google reviews are real.
           </p>
         </div>
 
         <div className="max-w-xl mx-auto">
           <form onSubmit={handleDiscovery} className="relative group">
-            <div className="relative flex items-center bg-white border border-slate-200 rounded-2xl p-1.5 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-50 transition-all">
-              <i className="fas fa-search text-slate-400 ml-4"></i>
+            <div className="relative flex items-center bg-white border border-slate-200 rounded-2xl p-1 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-50 transition-all">
+              <i className="fas fa-search text-slate-400 ml-3 sm:ml-4"></i>
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search business name and city..."
-                className="flex-grow px-4 py-3 text-lg outline-none text-slate-800 rounded-xl"
+                placeholder="Search business..."
+                className="flex-grow px-2 sm:px-4 py-2 sm:py-3 text-base sm:text-lg outline-none text-slate-800 rounded-xl min-w-0"
               />
               <button
                 type="submit"
                 disabled={state.isDiscovering || state.isSearching || !query.trim()}
-                className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 transition-all shadow-sm"
+                className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 transition-all shadow-sm shrink-0 text-sm sm:text-base"
               >
                 {state.isDiscovering ? <i className="fas fa-spinner fa-spin"></i> : 'Search'}
               </button>
@@ -122,7 +122,7 @@ const App: React.FC = () => {
                 <button
                   key={example}
                   onClick={() => { setQuery(example); handleDiscovery({ preventDefault: () => {} } as any); }}
-                  className="text-xs font-semibold bg-white text-slate-500 px-3 py-1.5 rounded-full hover:bg-slate-100 transition border border-slate-200 shadow-sm"
+                  className="text-[10px] sm:text-xs font-semibold bg-white text-slate-500 px-3 py-1.5 rounded-full hover:bg-slate-100 transition border border-slate-200 shadow-sm"
                 >
                   {example}
                 </button>
@@ -132,7 +132,7 @@ const App: React.FC = () => {
         </div>
 
         {state.error && (
-          <div className="mt-8 p-5 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-medium flex items-center shadow-sm">
+          <div className="mt-8 p-4 sm:p-5 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-xs sm:text-sm font-medium flex items-center shadow-sm">
             <i className="fas fa-exclamation-circle mr-3"></i>
             {state.error}
           </div>
@@ -140,18 +140,18 @@ const App: React.FC = () => {
 
         {state.candidates.length > 0 && !state.isSearching && !state.result && (
           <div className="mt-10 space-y-3">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-2">Select the exact place:</h3>
+            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Select the exact place:</h3>
             {state.candidates.map((place) => (
               <div 
                 key={place.id}
                 onClick={() => handleAudit(place)}
-                className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-500 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group"
+                className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-500 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group overflow-hidden"
               >
-                <div className="flex-grow">
-                  <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition">{place.name}</h4>
-                  <p className="text-xs text-slate-500 font-medium">{place.address}</p>
+                <div className="flex-grow min-w-0 mr-4">
+                  <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition truncate text-sm sm:text-base">{place.name}</h4>
+                  <p className="text-[10px] sm:text-xs text-slate-500 font-medium truncate">{place.address}</p>
                 </div>
-                <div className="shrink-0 flex items-center text-blue-600 font-bold text-xs bg-blue-50 px-4 py-2 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition">
+                <div className="shrink-0 flex items-center text-blue-600 font-bold text-[10px] sm:text-xs bg-blue-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition whitespace-nowrap">
                   Audit <i className="fas fa-chevron-right ml-2"></i>
                 </div>
               </div>
@@ -160,30 +160,30 @@ const App: React.FC = () => {
         )}
 
         {state.isSearching && (
-          <div className="mt-20 text-center py-12 bg-white rounded-3xl border border-slate-200 shadow-sm">
+          <div className="mt-12 sm:mt-20 text-center py-10 sm:py-12 bg-white rounded-3xl border border-slate-200 shadow-sm">
             <div className="mb-6">
-              <i className="fas fa-circle-notch fa-spin text-4xl text-blue-600"></i>
+              <i className="fas fa-circle-notch fa-spin text-3xl sm:text-4xl text-blue-600"></i>
             </div>
-            <h3 className="text-xl font-bold text-slate-900">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 px-4">
               {LOADING_STEPS[loadingStep]}
             </h3>
           </div>
         )}
 
         {state.result && !state.isSearching && (
-          <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-white border border-slate-200 rounded-[2.5rem] p-12 shadow-xl shadow-slate-200/50 text-center">
+          <div className="mt-8 sm:mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="bg-white border border-slate-200 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-12 shadow-xl shadow-slate-200/50 text-center">
               <button 
                 onClick={() => setState({...state, result: null, candidates: []})}
-                className="mb-8 text-xs font-bold text-slate-400 hover:text-blue-600 transition"
+                className="mb-6 sm:mb-8 text-[10px] sm:text-xs font-bold text-slate-400 hover:text-blue-600 transition"
               >
                 <i className="fas fa-arrow-left mr-2"></i> Start new audit
               </button>
 
-              <h3 className="text-2xl font-black text-slate-900 mb-2">{state.result.businessName}</h3>
-              <p className="text-sm text-slate-500 mb-12 font-medium">{state.result.address}</p>
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-2 leading-tight">{state.result.businessName}</h3>
+              <p className="text-[10px] sm:text-sm text-slate-500 mb-8 sm:mb-12 font-medium">{state.result.address}</p>
 
-              <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 mb-12">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 mb-10 sm:mb-12">
                 <Gauge 
                   value={state.result.realPercentage} 
                   label="Real Reviews" 
@@ -200,35 +200,35 @@ const App: React.FC = () => {
               </div>
 
               {/* Sentiment Breakdown Section */}
-              <div className="mt-8 pt-10 border-t border-slate-100">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Review Sentiment Feedback</h4>
-                <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
+              <div className="mt-8 pt-8 border-t border-slate-100">
+                <h4 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Review Sentiment Feedback</h4>
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-md mx-auto">
                   <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-2">
-                      <i className="fas fa-smile text-lg"></i>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-2">
+                      <i className="fas fa-smile text-base sm:text-lg"></i>
                     </div>
-                    <span className="text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.positive)}%</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">Positive</span>
+                    <span className="text-base sm:text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.positive)}%</span>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase">Positive</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center mb-2">
-                      <i className="fas fa-meh text-lg"></i>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center mb-2">
+                      <i className="fas fa-meh text-base sm:text-lg"></i>
                     </div>
-                    <span className="text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.neutral)}%</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">Neutral</span>
+                    <span className="text-base sm:text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.neutral)}%</span>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase">Neutral</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mb-2">
-                      <i className="fas fa-frown text-lg"></i>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mb-2">
+                      <i className="fas fa-frown text-base sm:text-lg"></i>
                     </div>
-                    <span className="text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.negative)}%</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">Negative</span>
+                    <span className="text-base sm:text-lg font-black text-slate-900">{Math.round(state.result.sentimentBreakdown.negative)}%</span>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase">Negative</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-12 pt-8 text-center">
-                <p className="text-sm text-slate-400 font-medium max-w-lg mx-auto leading-relaxed">
+              <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 text-center">
+                <p className="text-xs sm:text-sm text-slate-400 font-medium max-w-lg mx-auto leading-relaxed">
                   The engine identifies that <span className="text-slate-900 font-bold">{Math.round(state.result.realPercentage)}%</span> of this business's feedback follows natural human patterns. The sentiment analysis highlights a predominantly <span className="text-slate-900 font-bold">{state.result.sentimentBreakdown.positive > 50 ? 'positive' : state.result.sentimentBreakdown.negative > 30 ? 'critical' : 'mixed'}</span> customer reception.
                 </p>
               </div>
@@ -237,7 +237,7 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <footer className="mt-32 py-10 text-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+      <footer className="mt-20 sm:mt-32 py-10 text-center text-slate-400 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest px-4">
         Neural Review Audit Engine V3.1
       </footer>
     </div>
