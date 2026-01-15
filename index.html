@@ -13,6 +13,14 @@
       font-family: 'Inter', sans-serif;
       background-color: #f8fafc;
     }
+    /* Fix for browser autofill background colors */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 100px white inset !important;
+      -webkit-text-fill-color: #1e293b !important;
+    }
   </style>
 <script type="importmap">
 {

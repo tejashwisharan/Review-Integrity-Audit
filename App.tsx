@@ -97,19 +97,20 @@ const App: React.FC = () => {
 
         <div className="max-w-xl mx-auto">
           <form onSubmit={handleDiscovery} className="relative group">
-            <div className="relative flex items-center bg-white border border-slate-200 rounded-2xl p-1 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-50 transition-all">
-              <i className="fas fa-search text-slate-400 ml-3 sm:ml-4"></i>
+            <div className="relative flex items-center bg-white border border-slate-200 rounded-2xl p-1 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-50 transition-all overflow-hidden">
+              <i className="fas fa-search text-slate-400 ml-3 sm:ml-4 shrink-0"></i>
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search business..."
-                className="flex-grow px-2 sm:px-4 py-2 sm:py-3 text-base sm:text-lg outline-none text-slate-800 rounded-xl min-w-0"
+                autoComplete="off"
+                className="flex-grow px-2 sm:px-4 py-2 sm:py-3 text-base sm:text-lg outline-none text-slate-800 bg-white rounded-xl min-w-0"
               />
               <button
                 type="submit"
                 disabled={state.isDiscovering || state.isSearching || !query.trim()}
-                className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 transition-all shadow-sm shrink-0 text-sm sm:text-base"
+                className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 transition-all shadow-sm shrink-0 text-sm sm:text-base mr-0.5"
               >
                 {state.isDiscovering ? <i className="fas fa-spinner fa-spin"></i> : 'Search'}
               </button>
@@ -147,7 +148,7 @@ const App: React.FC = () => {
                 onClick={() => handleAudit(place)}
                 className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-500 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group overflow-hidden"
               >
-                <div className="flex-grow min-w-0 mr-4">
+                <div className="flex-grow min-w-0 mr-4 text-left">
                   <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition truncate text-sm sm:text-base">{place.name}</h4>
                   <p className="text-[10px] sm:text-xs text-slate-500 font-medium truncate">{place.address}</p>
                 </div>
@@ -238,7 +239,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="mt-20 sm:mt-32 py-10 text-center text-slate-400 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest px-4">
-        Neural Review Audit Engine V3.1
+        Neural Review Audit Engine V3.2
       </footer>
     </div>
   );
